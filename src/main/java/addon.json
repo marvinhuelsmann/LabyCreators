@@ -1,0 +1,10 @@
+{
+  "uuid": "%uuid%",
+  "name": "LabyCreators",
+  "mainClass": "de.marvhuelsmann.labycreators.LabyCreators",
+  "description": "Find new Content Creator on Twitch or Youtube!",
+  "version": 1.0,
+  "author": "LabyHelp Store",
+  "category": 2,
+  "icon": "https://i.imgur.com/OmOFPcU.png"
+}
