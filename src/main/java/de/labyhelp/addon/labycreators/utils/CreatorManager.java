@@ -47,7 +47,6 @@ public class CreatorManager {
             for (final String entry : array) {
                 final String[] data = entry.split(":");
                 if (data.length == 2) {
-                    live.clear();
                     live.put(data[0], data[1]);
                 }
             }

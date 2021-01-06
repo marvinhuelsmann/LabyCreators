@@ -4,7 +4,6 @@ import de.labyhelp.addon.labycreators.listener.ClientJoinListener;
 import de.labyhelp.addon.labycreators.listener.ClientMessageListener;
 import de.labyhelp.addon.labycreators.utils.CreatorManager;
 import de.labyhelp.addon.labycreators.utils.SettingsManager;
-import de.labyhelp.addon.labycreators.utils.Updater;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;
 import net.labymod.settings.elements.BooleanElement;
@@ -27,7 +26,6 @@ public class LabyCreators extends LabyModAddon {
 
     private static LabyCreators instance;
 
-    private final Updater updater = new Updater();
     private final SettingsManager settingsManager = new SettingsManager();
     private final CreatorManager creatorsManager = new CreatorManager();
 
@@ -37,6 +35,7 @@ public class LabyCreators extends LabyModAddon {
     @Override
     public void onEnable() {
         instance = this;
+
         try {
             String webVersion = readVersion();
 
@@ -54,11 +53,6 @@ public class LabyCreators extends LabyModAddon {
         this.getApi().getEventManager().register(new ClientMessageListener());
 
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if (LabyCreators.getInstance().getSettingsManager().isNewerVersion()) {
-                LabyCreators.getInstance().getUpdater().update();
-            }
-        }));
     }
 
     @Override
@@ -101,9 +95,6 @@ public class LabyCreators extends LabyModAddon {
 
     public ExecutorService getExecutor() {
         return threadPool;
-    }
-    public Updater getUpdater() {
-        return updater;
     }
     public SettingsManager getSettingsManager() {
         return settingsManager;

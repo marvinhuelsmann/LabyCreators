@@ -1,5 +1,6 @@
 package de.labyhelp.addon.labycreators.listener;
 
+import de.labyhelp.addon.LabyHelp;
 import de.labyhelp.addon.labycreators.LabyCreators;
 import net.labymod.api.events.MessageSendEvent;
 import net.labymod.main.LabyMod;
@@ -23,21 +24,22 @@ public class ClientMessageListener implements MessageSendEvent {
                     if (LabyCreators.getInstance().getCreatorsManager().getCreators().contains(LabyMod.getInstance().getPlayerUUID().toString())) {
                         if (LabyCreators.getInstance().getSettingsManager().sendAnnounce != 1) {
                             LabyCreators.getInstance().getCreatorsManager().sendLive(LabyMod.getInstance().getPlayerUUID());
-                            LabyCreators.getInstance().sendClientMessage(EnumChatFormatting.GREEN + "Your stream is now entered for 2 hours");
+                            LabyHelp.getInstance().sendTranslMessage("labycreators.enterstream");
 
                             LabyCreators.getInstance().getSettingsManager().sendAnnounce = 1;
                         } else {
-                            LabyCreators.getInstance().sendClientMessage("Please wait or asked an Moderator or Administrator..");
+                            LabyHelp.getInstance().sendTranslMessage("labycreators.ask");
                         }
                     } else {
-                        LabyCreators.getInstance().sendClientMessage(EnumChatFormatting.RED + "You dont have permissions!");
+                        LabyHelp.getInstance().sendTranslMessage("main.noperms");
                     }
                 });
                 return true;
             } else if (s.startsWith("/streamlist")) {
                 LabyCreators.getInstance().getExecutor().submit(() -> {
+                    LabyCreators.getInstance().getCreatorsManager().getLiveStreams().clear();
                     LabyCreators.getInstance().getCreatorsManager().readLive();
-                    LabyCreators.getInstance().sendClientMessage("Active Livestreams:");
+                    LabyHelp.getInstance().sendTranslMessage("labycreators.activestream");
 
                     for (Map.Entry<String, String> streams : LabyCreators.getInstance().getCreatorsManager().getLiveStreams().entrySet()) {
                         LabyCreators.getInstance().sendClientMessage(UUIDFetcher.getName(UUID.fromString(streams.getKey())));
@@ -52,7 +54,7 @@ public class ClientMessageListener implements MessageSendEvent {
             i++;
 
             if (i == 1) {
-                LabyCreators.getInstance().sendClientMessage("You have deactivated the Addon!");
+                LabyHelp.getInstance().sendTranslMessage("main.dis");
             }
             return false;
         }
