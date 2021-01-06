@@ -1,4 +1,4 @@
-package de.marvhuelsmann.labycreators.listener;
+package de.labyhelp.addon.labycreators.listener;
 
 import net.labymod.utils.Consumer;
 import net.labymod.utils.ServerData;

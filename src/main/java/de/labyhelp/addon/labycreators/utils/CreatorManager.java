@@ -1,4 +1,4 @@
-package de.marvhuelsmann.labycreators.utils;
+package de.labyhelp.addon.labycreators.utils;
 
 import org.apache.commons.io.IOUtils;
 

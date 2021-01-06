@@ -1,10 +1,10 @@
-package de.marvhuelsmann.labycreators;
+package de.labyhelp.addon.labycreators;
 
-import de.marvhuelsmann.labycreators.listener.ClientJoinListener;
-import de.marvhuelsmann.labycreators.listener.ClientMessageListener;
-import de.marvhuelsmann.labycreators.utils.CreatorManager;
-import de.marvhuelsmann.labycreators.utils.SettingsManager;
-import de.marvhuelsmann.labycreators.utils.Updater;
+import de.labyhelp.addon.labycreators.listener.ClientJoinListener;
+import de.labyhelp.addon.labycreators.listener.ClientMessageListener;
+import de.labyhelp.addon.labycreators.utils.CreatorManager;
+import de.labyhelp.addon.labycreators.utils.SettingsManager;
+import de.labyhelp.addon.labycreators.utils.Updater;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;
 import net.labymod.settings.elements.BooleanElement;
@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 
 public class LabyCreators extends LabyModAddon {
 
-    private static LabyCreators instace;
+    private static LabyCreators instance;
 
     private final Updater updater = new Updater();
     private final SettingsManager settingsManager = new SettingsManager();
@@ -36,17 +36,17 @@ public class LabyCreators extends LabyModAddon {
 
     @Override
     public void onEnable() {
-        instace = this;
+        instance = this;
         try {
             String webVersion = readVersion();
 
-            LabyCreators.getInstace().getSettingsManager().currentVersion = webVersion;
-            if (!webVersion.equalsIgnoreCase(LabyCreators.getInstace().getSettingsManager().currentVersion)) {
-                LabyCreators.getInstace().getSettingsManager().isNewerVersion = true;
+            LabyCreators.getInstance().getSettingsManager().currentVersion = webVersion;
+            if (!webVersion.equalsIgnoreCase(LabyCreators.getInstance().getSettingsManager().currentVersion)) {
+                LabyCreators.getInstance().getSettingsManager().isNewerVersion = true;
             }
-            LabyCreators.getInstace().getSettingsManager().serverResponding = true;
+            LabyCreators.getInstance().getSettingsManager().serverResponding = true;
         } catch (Exception ignored) {
-            LabyCreators.getInstace().getSettingsManager().serverResponding = false;
+            LabyCreators.getInstance().getSettingsManager().serverResponding = false;
         }
 
         System.out.println("Loading Listeners");
@@ -54,19 +54,16 @@ public class LabyCreators extends LabyModAddon {
         this.getApi().getEventManager().register(new ClientMessageListener());
 
 
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (LabyCreators.getInstace().getSettingsManager().isNewerVersion()) {
-                    LabyCreators.getInstace().getUpdater().update();
-                }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (LabyCreators.getInstance().getSettingsManager().isNewerVersion()) {
+                LabyCreators.getInstance().getUpdater().update();
             }
         }));
     }
 
     @Override
     public void loadConfig() {
-        LabyCreators.getInstace().getSettingsManager().addonEnabled = !this.getConfig().has("enable") || this.getConfig().get("enable").getAsBoolean();
+        LabyCreators.getInstance().getSettingsManager().addonEnabled = !this.getConfig().has("enable") || this.getConfig().get("enable").getAsBoolean();
 
     }
 
@@ -75,27 +72,27 @@ public class LabyCreators extends LabyModAddon {
         final BooleanElement enabled = new BooleanElement("Enabled", new ControlElement.IconData(Material.LEVER), new Consumer<Boolean>() {
             @Override
             public void accept(final Boolean enable) {
-                LabyCreators.getInstace().getSettingsManager().addonEnabled = enable;
+                LabyCreators.getInstance().getSettingsManager().addonEnabled = enable;
 
 
                 LabyCreators.this.getConfig().addProperty("enable", enable);
                 LabyCreators.this.saveConfig();
             }
-        }, LabyCreators.getInstace().getSettingsManager().getAddonEnabled());
+        }, LabyCreators.getInstance().getSettingsManager().getAddonEnabled());
         settings.add(enabled);
 
-        settings.add((SettingsElement) new HeaderElement(" "));
-        settings.add((SettingsElement) new HeaderElement("§lAddon Commands: /streamlist"));
-        settings.add((SettingsElement) new HeaderElement("§fFrom the LabyHelp Store // LabyHelp.de"));
-        settings.add((SettingsElement) new HeaderElement(" "));
+        settings.add(new HeaderElement(" "));
+        settings.add(new HeaderElement("§lAddon Commands: /streamlist"));
+        settings.add(new HeaderElement("§fFrom the LabyHelp Store // LabyHelp.de"));
+        settings.add(new HeaderElement(" "));
     }
 
-    public static LabyCreators getInstace() {
-        return instace;
+    public static LabyCreators getInstance() {
+        return instance;
     }
 
     public void sendClientMessage(String message) {
-        LabyMod.getInstance().displayMessageInChat(LabyCreators.getInstace().getSettingsManager().messagePrefix + message);
+        LabyMod.getInstance().displayMessageInChat(LabyCreators.getInstance().getSettingsManager().messagePrefix + message);
     }
 
     public void sendClientMessageDefault(String message) {

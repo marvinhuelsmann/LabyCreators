@@ -1,7 +1,7 @@
 {
   "uuid": "%uuid%",
   "name": "LabyCreators",
-  "mainClass": "de.marvhuelsmann.labycreators.LabyCreators",
+  "mainClass": "de.labyhelp.addon.labycreators.LabyCreators",
   "description": "Find new Content Creator on Twitch or Youtube!",
   "version": 1.0,
   "author": "LabyHelp Store",
