@@ -23,7 +23,8 @@ public class ClientMessageListener implements MessageSendEvent {
                     LabyCreators.getInstance().getCreatorsManager().readCreators();
                     if (LabyCreators.getInstance().getCreatorsManager().getCreators().contains(LabyMod.getInstance().getPlayerUUID().toString())) {
                         if (LabyCreators.getInstance().getSettingsManager().sendAnnounce != 1) {
-                            LabyCreators.getInstance().getCreatorsManager().sendLive(LabyMod.getInstance().getPlayerUUID());
+
+                            LabyCreators.getInstance().getCreatorsManager().sendLive();
                             LabyHelp.getInstance().sendTranslMessage("labycreators.enterstream");
 
                             LabyCreators.getInstance().getSettingsManager().sendAnnounce = 1;

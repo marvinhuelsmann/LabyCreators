@@ -1,5 +1,7 @@
 package de.labyhelp.addon.labycreators.utils;
 
+import de.labyhelp.addon.LabyHelp;
+import net.labymod.main.LabyMod;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -15,22 +17,8 @@ public class CreatorManager {
     private final HashMap<String, String> live = new HashMap<String, String>();
     private final ArrayList<String> creator = new ArrayList<>();
 
-    public String sendLive(final UUID uuid) {
-        try {
-            if (uuid != null) {
-
-                final HttpURLConnection con = (HttpURLConnection) new URL("https://marvhuelsmann.de/sendLive.php?uuid=" + uuid + "&name=n").openConnection();
-                con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-                con.setConnectTimeout(3000);
-                con.setReadTimeout(3000);
-                con.connect();
-                return IOUtils.toString(con.getInputStream(), StandardCharsets.UTF_8);
-            }
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new IllegalStateException("Could not fetch title", e);
-        }
+    public void sendLive() {
+        LabyHelp.getInstance().getRequestManager().sendRequest("https://marvhuelsmann.de/sendLive.php?uuid=" + LabyMod.getInstance().getPlayerUUID() + "&name=n");
     }
 
     public void readLive() {

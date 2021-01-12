@@ -31,15 +31,6 @@
           </set>
         </option>
       </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-          </set>
-        </option>
-      </GradleProjectSettings>
     </option>
   </component>
   <component name="GradleUISettings">
@@ -113,6 +104,11 @@
       <option name="url" value="file:/$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="deobfDeps" />
+      <option name="name" value="deobfDeps" />
+      <option name="url" value="file:/$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="forge" />
       <option name="name" value="forge" />
       <option name="url" value="http://files.minecraftforge.net/maven" />
@@ -136,6 +132,11 @@
       <option name="id" value="GitHubPackages" />
       <option name="name" value="GitHubPackages" />
       <option name="url" value="https://maven.pkg.github.com/labyhelp/labyhelp" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="MavenLocal" />
+      <option name="name" value="MavenLocal" />
+      <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="MavenLocal" />
@@ -351,13 +352,13 @@
     </library>
     <library name="Gradle: de.labyhelp:addon:2.5.6">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.labyhelp/addon/2.5.6/15da2b4727ae5082a3eebf5956972545ff234d9e/addon-2.5.6.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/de/labyhelp/addon/2.5.6/addon-2.5.6.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.labyhelp/addon/2.5.6/c25f6084d12c2bdb4ebcb2d322724264f2da6a0c/addon-2.5.6-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/de/labyhelp/addon/2.5.6/addon-2.5.6-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.labyhelp/addon/2.5.6/49efb96d3339d60fdcf3cd24ac371d4a0b348ccb/addon-2.5.6-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/de/labyhelp/addon/2.5.6/addon-2.5.6-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: io.netty:netty-all:4.0.23.Final">

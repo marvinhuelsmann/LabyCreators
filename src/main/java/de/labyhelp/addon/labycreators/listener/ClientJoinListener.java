@@ -6,7 +6,5 @@ import net.labymod.utils.ServerData;
 public class ClientJoinListener implements Consumer<ServerData> {
 
     @Override
-    public void accept(ServerData serverData) {
-
-    }
+    public void accept(ServerData serverData) {}
 }
